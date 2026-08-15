@@ -1,6 +1,9 @@
 # Repair-WindowsNetworkStackBrowserSmbClientLanmanWorkstationAndPersistentDrives.ps1
 
-A comprehensive, production-grade PowerShell troubleshooting script designed to systematically diagnose and repair stubborn Windows network connectivity errors, browser cache issues, SMB client services (`LanmanWorkstation`), firewall rules, and persistent network drives.
+A comprehensive PowerShell troubleshooting script designed to systematically diagnose and repair stubborn Windows network connectivity errors, browser cache issues, SMB client services (`LanmanWorkstation`), firewall rules, and persistent network drives.
+
+> **⚠️ Disclaimer & Scope:** 
+> This script is provided **strictly for experimental testing, troubleshooting, and personal use**. It is **not** validated, tested, or suitable for business production environments, corporate deployments, or enterprise security-grade infrastructures. Use at your own discretion in personal lab or home environments.
 
 ## 🚀 Features & What It Fixes
 

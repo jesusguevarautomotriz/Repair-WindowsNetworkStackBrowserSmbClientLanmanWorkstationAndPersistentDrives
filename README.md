@@ -45,7 +45,7 @@ A quick-and-dirty PowerShell troubleshooting script designed to systematically d
 
 ---
 
-## � Full Documentation
+## 📚 Full Documentation
 
 **I want to see the full documentation and understand what this does before I run it.**
 
@@ -53,7 +53,7 @@ Everything you need to know — detailed use cases, prerequisites, what gets des
 
 ---
 
-## �📑 Table of Contents
+## 📑 Table of Contents
 
 - [What This Script Is For — Real Use Cases](#-what-this-script-is-for--real-use-cases)
 - [What Personal Tweaks Will This Script Destroy?](#what-personal-tweaks-and-software-settings-will-this-script-destroy)

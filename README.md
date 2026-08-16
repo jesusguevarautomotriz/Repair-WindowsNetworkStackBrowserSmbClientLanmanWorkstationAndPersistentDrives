@@ -1,6 +1,6 @@
 # Repair-WindowsNetworkStackBrowserSmbClientLanmanWorkstationAndPersistentDrives.ps1
 
-A quick-and-dirty PowerShell troubleshooting script designed to systematically diagnose and repair stubborn Windows network connectivity errors, browser cache issues, SMB client services (`LanmanWorkstation`), firewall rules, and persistent network drives.
+A quick-and-dirty PowerShell troubleshooting script designed to systematically diagnose and repair stubborn Windows network connectivity errors, browser cache issues, SMB/CIFS client services (`LanmanWorkstation`), firewall rules, persistent network drives, and Samba protocol connections from Linux clients (Ubuntu, Debian, etc.).
 
 > **⚠️ DISCLAIMER & CRITICAL WARNING**
 > 
@@ -14,7 +14,7 @@ A quick-and-dirty PowerShell troubleshooting script designed to systematically d
 
 ## ⚡ TL;DR (Too Long; Didn't Read)
 
-**What it does:** Performs 9 aggressive network stack resets to repair stubborn Windows connectivity, SMB sharing, and drive mapping issues.
+**What it does:** Performs 9 aggressive network stack resets to repair stubborn Windows connectivity, SMB sharing (including Samba protocol connections from Linux clients like Ubuntu/Debian), and drive mapping issues.
 
 **When to use it:** Only as a **last resort** after running `sfc /scannow` and `DISM /Online /Cleanup-Image /RestoreHealth`. Do NOT run before standard troubleshooting.
 
@@ -36,6 +36,7 @@ A quick-and-dirty PowerShell troubleshooting script designed to systematically d
 - ✅ Test/lab VMs
 - ✅ Throwaway personal computers
 - ✅ Post-virus/malware recovery when network is broken
+- ✅ When Linux/Samba clients can't connect to Windows shares (authentication errors)
 - ✅ When all standard troubleshooting has failed
 
 **Recommended first:** Run `sfc /scannow` and `DISM /Online /Cleanup-Image /RestoreHealth` BEFORE this script.
@@ -95,6 +96,15 @@ Run this when:
 * **Windows suffered serious corruption after failed updates** — A botched Windows update, driver failure, or system crash left your TCP/IP stack, network adapters, or firewall rules in an invalid state.
 
 * **Network connectivity works randomly or intermittently** — Connections drop and reconnect without reason; this script clears stuck state data and forces a hard reset of all network components.
+
+* **Linux/Samba clients cannot connect to Windows network shares with authentication errors** — Your Ubuntu, Debian, or other Linux systems fail to connect to Windows-shared SMB/CIFS (Server Message Block / Common Internet File System) network folders. Common error messages include "Authentication failed," "Permission denied," "Unable to access the share," "connection timeout," or generic mount failures. This typically occurs when:
+  * Windows firewall blocks SMB protocol ports (TCP 445, 139) required for file and printer sharing between Windows and Linux Samba clients
+  * The `LanmanWorkstation` service (Windows SMB Client) is stopped, corrupted, fails to restart, or is in an invalid state
+  * SMB/CIFS protocol negotiation between Windows and Linux Samba clients fails due to network stack corruption, invalid Winsock catalog, or registry configuration errors
+  * Browser/discovery services are disabled, preventing Linux systems from discovering Windows shares
+  * Post-malware, post-update, or post-driver-failure remnants leave the SMB stack in an inconsistent state
+  
+  **How this script helps:** It rebuilds the Winsock catalog to ensure proper SMB protocol support, enables Windows firewall rules for File and Printer Sharing (which SMB/CIFS depends on), forcibly restarts the `LanmanWorkstation` service to re-establish SMB client functionality, and cycles network adapters to clear stuck SMB connection states. After running this script, Linux Samba clients should be able to authenticate and connect to Windows network shares normally.
 
 **In all these cases**, a **complete wipe and restoration of the network stack to factory defaults** is your last resort before a fresh Windows install.
 

@@ -1,6 +1,10 @@
 # Repair-WindowsNetworkStackBrowserSmbClientLanmanWorkstationAndPersistentDrives.ps1
 
-A quick-and-dirty PowerShell troubleshooting script designed to systematically diagnose and repair stubborn Windows network connectivity errors, browser cache issues, SMB/CIFS client services (`LanmanWorkstation`), firewall rules, persistent network drives, and Samba protocol connections from Linux clients (Ubuntu, Debian, etc.).
+**Experimental PowerShell troubleshooting script for personal network, windows browse network computers or LAN network shared folders and drives, and SMB drive letters mapping repair.** Designed for home lab and testing use only; not suitable for business or enterprise security environments.
+
+A quick-and-dirty utility that systematically diagnoses and repairs stubborn Windows network connectivity errors, browser cache issues, SAMBA SMB/CIFS client services (`LanmanWorkstation`), firewall rules, persistent network drives, and Samba protocol connections from Windows 10/11 or Linux clients (Ubuntu, Debian, etc.). 
+
+This script performs aggressive resets to the Windows network stack, firewall rules, and drive mappings as a **last-resort troubleshooting measure** for deep-level connectivity failures that survive standard Windows repair procedures. Use this when you're facing broken network connections, inaccessible SMB shares, or Linux/Samba authentication errors that won't resolve through standard troubleshooting.
 
 > **⚠️ DISCLAIMER & CRITICAL WARNING**
 > 

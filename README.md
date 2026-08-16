@@ -32,7 +32,7 @@ A quick-and-dirty PowerShell troubleshooting script designed to systematically d
 You can obtain and run this utility using either the latest GitHub release or by cloning the repository.
 
 ### Method 1: Download from GitHub Releases (Recommended)
-1. Go to the [Releases Page](https://github.com/jesusguevarautomotriz/Repair-WindowsNetworkStackBrowserSmbClientLanmanWorkstationAndPersistentDrives/releases) and download the script asset or source code archive (`.zip` / `.tar.gz`) from the latest `26.08_experimental_v0.0.2` release.
+1. Go to the [Releases Page](https://github.com/jesusguevarautomotriz/Repair-WindowsNetworkStackBrowserSmbClientLanmanWorkstationAndPersistentDrives/releases) and download the script asset or source code archive (`.zip` / `.tar.gz`) from the latest release.
 2. Extract the package to your preferred working directory.
 
 ### Method 2: Clone or Download the Repository

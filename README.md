@@ -16,7 +16,7 @@ A quick-and-dirty PowerShell troubleshooting script designed to systematically d
 
 **What it does:** Performs 9 aggressive network stack resets to repair stubborn Windows connectivity, SMB sharing (including Samba protocol connections from Linux clients like Ubuntu/Debian), and drive mapping issues.
 
-**When to use it:** Only as a **last resort** after running `sfc /scannow` and `DISM /Online /Cleanup-Image /RestoreHealth`. Do NOT run before standard troubleshooting.
+**Prerequisites, When to use it:** Only as a **last resort** after running `sfc /scannow` and `DISM /Online /Cleanup-Image /RestoreHealth`. Do NOT run before standard troubleshooting.
 
 **What it destroys:**
 - ❌ VPN connections (will need reinstalling)
@@ -79,7 +79,7 @@ This script tries to solve **stubborn, deep-level network problems** that surviv
 
 **Before Running This Script:**
 
-**See the [TL;DR section](#-tldr-too-long-didnt-read) for the mandatory prerequisites:** You must run `sfc /scannow` and `DISM /Online /Cleanup-Image /RestoreHealth` FIRST, plus complete all standard manual troubleshooting steps (ipconfig, Device Manager, firewall verification, ping/tracert diagnostics).
+**Prerequisites:** You must run `sfc /scannow` and `DISM /Online /Cleanup-Image /RestoreHealth` FIRST, plus complete all standard manual troubleshooting steps (ipconfig, Device Manager, firewall verification, ping/tracert diagnostics).
 
 **Only proceed with this script if those standard procedures fail or don't resolve your issue.**
 

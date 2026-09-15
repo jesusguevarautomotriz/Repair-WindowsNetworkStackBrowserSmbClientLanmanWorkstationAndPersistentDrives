@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-    SMB Server & Network Discovery Enabler for Windows
+    Client & Network Discovery Enabler for Windows
 .DESCRIPTION
     Configures an active Windows machine to act as an SMB file server and enables 
     Network Discovery, File and Printer Sharing, and required firewall rules.
 #>
 
 # =====================================================================
-# SERVER-SIDE SCRIPT: Enable Network Discovery, File Sharing & SMB Services
-# Must be run as Administrator on the machine acting as the SMB Server.
+# CLIENT-SIDE SCRIPT: Enable Network Discovery, File Sharing & SMB Services
+# Must be run as Administrator on the machine acting as the SMB Client.
 # =====================================================================
 
 # 1. Ensure script runs with Administrator privileges

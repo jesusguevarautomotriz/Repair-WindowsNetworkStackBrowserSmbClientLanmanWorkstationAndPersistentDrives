@@ -4,9 +4,11 @@ Server side (Any Windows 10 or 11 PC with shared folders) specific Browse  Windo
 
     Normal Windows behavior after reboot:
 
-    - In a running well PC that is not corrupted, Windows normally remembers the network category (Public or Private) for a saved Wi-Fi profile for a known SSID, but it hiddenly can reclassify the same home network as Public besides show the current Wi-Fi network maked as Private in Settings again after reboot or reconnection, disabling Network Discovery and File Sharing.
+Normal Windows behavior after reboot:
 
-    ![Windows 11 Wi-Fi properties for the connected home network show the network profile set to Public, while Network Discovery and File Sharing remain disabled after a restart or reconnection.](images\windows-11-wifi-properties-generic-network.jpeg)
+- On a properly functioning, non-corrupted PC, Windows normally remembers the network category (Public or Private) for a saved Wi-Fi profile associated with a known SSID. However, after a reboot or Wi-Fi newtork discconection and reconnection, Windows may silently reclassify the same home network as Public while the current Wi-Fi network still appears marked visible as Private in Settings, this eventually disable Network Discovery and File Sharing.
+
+![Windows 11 Wi-Fi properties for the connected home network show the network profile set to Public, while Network Discovery and File Sharing remain disabled after a restart or reconnection.](images/windows-11-wifi-properties-generic-network.jpeg)
 
     Note: When the adapter for some reason disconnects the observed behavior is when reconnects th te network still classified as Private and the File Sharing still enabled meaning the problem is across reboots.
 

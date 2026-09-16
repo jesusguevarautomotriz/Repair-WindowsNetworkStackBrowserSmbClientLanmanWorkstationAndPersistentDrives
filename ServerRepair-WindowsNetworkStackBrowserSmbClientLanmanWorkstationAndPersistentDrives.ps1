@@ -1,41 +1,7 @@
 <#
 .SYNOPSIS
-Server side (Any Windows 10 or 11 PC with shared folders) specific Browse  Windows Network Discovery that is persistent disable by default by windows after every restart and the user find annoying go on wifi network make private every time, go on file explorer enable file sharing, LanmanServer (SMB Server).
-    - This is no a windows error, this is a windows design decision to disable network discovery and file sharing by default for security reasons. This script will enable network discovery and file sharing on the server facilitate this jus by running the script instead of clicking trought the windows options.
-        Configures a Windows computer as a discoverable SMB file server on a trusted network.
+To be filled by good proactive AI assistant.
 
-    Normal Windows behavior after reboot:
-
-    - Windows normally remembers the network category (Public or Private) for a saved Wi-Fi profile for a known SSID, but it can reclassify the same home network as Public again even after restart is currently displayed like Private and disabling Network Discovery and File Sharing.
-
-    Note: When the adapter for some reason disconnects the observed behavior is when reconnects th te network still classified as Private and the File Sharing still enabled meaning the problem is across reboots.
-
-    - After reboot, Windows may disable Network Discovery and File Sharing for security reasons, even if the network was previously trusted [(]Private].
-
-    - Then after reboot, when you go to Settings > Network & Internet > Wi-Fi > [Your Network] > Properties, you may find that the network is correctly set to [Private], but Network Discovery and File Sharing are disabled.
-
-    - Next, when you open File Explorer and click on Network, you may see a message like "[File sharing is turned off. Some network computers and devices might not be visible. Click to change...]".
-
-    - When you click to change, appears the option liste with a shield elevated icon "[Turn on network discovery and file sharing]", next a dialog boox appears:
-        Network discovery and file sharing.
-        Do you want to turn on network discovery and file sharing?
-        [No, make the network that I am connected to a private network. Network discovery and file sharing will be turned on for private networks, such as those at home and workplaces.]
-        [Yes, turn on network discovery and file sharing for all public networks.]
-        
-        Then finally you can see other computers and devices on the network, even the server itself computer name along as the others computers availables on the network, but after a reboot, the same problem appears again.
-
-This script was created to automate this repetitive process and remove the need to repeat the same manual steps every time.
-
-        - Network discovery and file sharing are restricted on Public networks by default.
-        - Network discovery and file sharing are normally enabled only after the network is
-            trusted, the profile is set to Private, and the appropriate firewall rules are enabled.
-        - These restrictions are security features, not necessarily Windows errors. They help
-            prevent the computer and its shared resources from being exposed on untrusted networks.
-
-        This script is intended for a trusted network. It sets active network profiles to
-        Private where applicable, enables Network Discovery and File and Printer Sharing
-        firewall rules, starts the discovery and SMB services, and configures the computer
-        to publish and host SMB shares without requiring the settings to be changed manually.
 .DESCRIPTION
     Performs deep resets on DNS, IP, Winsock, TCP/IP stack, WinHTTP/WinINet proxies,
     clears web caches, cycles physical network adapters, configures SMB firewall rules,

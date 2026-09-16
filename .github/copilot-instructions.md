@@ -32,3 +32,14 @@ This repository is a long-lived Windows automation / installer project. Preserve
 The user’s intent is clear: preserve the real behavior, keep the purposeful functionality, avoid endless churn, and do not lose months of work during a new session.
 
 This project should be treated as a production artifact with operational continuity as the top priority.
+
+## Commit messages and change summaries
+- Before suggesting a commit message, inspect the actual working-tree changes with `git status` and `git diff`.
+- Describe only changes that are present in the diff; do not describe planned, assumed, or suggested changes as completed.
+- Use a specific subject that identifies the affected area and purpose.
+- Include a short body listing the meaningful additions, modifications, removals, documentation changes, and behavior changes.
+- Explicitly mention important regressions, removed documentation, placeholders, renamed files, or broken references.
+- Do not use vague subjects such as "improve code quality", "refactor for maintainability", or "update files" unless the diff truly contains only that change.
+- Do not describe a script as refactored unless the diff actually changes its code structure.
+- Treat placeholders replacing existing operational documentation as a problem that must be reported.
+- Keep commit messages concise, but make the body specific enough to explain the real user-visible or operational impact.

@@ -1,14 +1,33 @@
-This script consist of two script, one for run on the server and one for run on the client.
+## Summary
 
-Server side (Any Windows 10 or 11 PC with shared folders) specific Browse  Windows Network Discovery that is persistent disable by default by windows after every restart and the user find annoying go on wifi network make private every time, go on file explorer enable file sharing, LanmanServer (SMB Server).
-    - This is no a windows error, this is a windows design decision to disable network discovery and file sharing by default for security reasons. This script will enable network discovery and file sharing on the server facilitate this jus by running the script instead of clicking trought the windows options.
-        Configures a Windows computer as a discoverable SMB file server on a trusted network.
+### Issue description:
+windows design decision to disable network discovery and file sharing by default after every reboot for security reasons making hard to share files on home local area network, the user find annoying go on WiFi network make private every time, go on file explorer enable file sharing, LanmanServer (SMB Server).
 
-    Normal Windows behavior after reboot:
+## Purpose
+This script will enable network discovery and file sharing on the server and the client by facilitate this just by running the script instead of clicking trought the windows options trought the GUI. This script was created to automate this repetitive process and remove the need to repeat the same manual steps every time.
 
-Normal Windows behavior after reboot:
+This script consist of two scripts: one for run on the server and one for run on the client.
 
-- On a properly functioning, non-corrupted PC, Windows normally remembers the network category (Public or Private) for a saved Wi-Fi profile associated with a known SSID. However, after a reboot or Wi-Fi newtork discconection and reconnection, Windows may silently reclassify the same home network as Public while the current Wi-Fi network still appears marked visible as Private in Settings, this eventually disable Network Discovery and File Sharing.
+SMB server side, any Windows 10 or 11 PC with shared folders: `WindowsSMBServerFixWiFiSettoPrivateNetworkEnableNetworkDiscoveryFileSharing.ps1`
+Configures a Windows computer as a discoverable SMB file server on a trusted network.
+  - Set Wi-Fi network profile from public to private.
+  - Enabling firewall rules for Network Discovery and File Sharing.
+  - Enable Network Discovery & Browsing services.
+  - Configuring LanmanServer (Hosts SMB shares service).
+  - Refresh Persisted Network Drives from Registry.
+
+
+Client side, any windows 10 or 11 PC triying to connect and access to the shared folders on the SMB server: `ClientsmbSeverEnableNetworkDiscoveryFileSharing.ps1`
+Configures a Windows computer as a discoverable SMB client on a trusted network.
+  - Set Wi-Fi network profile from public to private.
+  - Enabling firewall rules for Network Discovery and File Sharing.
+  - Enable Network Discovery & Browsing services.
+  - Restarts the LanmanWorkstation (SMB Client) service.
+  - Refresh Persisted Network Drives from Registry.
+     
+
+## Detailed issue desciption with screenshots:
+  - On a properly functioning, non-corrupted PC, Windows normally remembers the network category (Public or Private) for a saved Wi-Fi profile associated with a known SSID. However, after a reboot or Wi-Fi newtork discconection and reconnection, Windows may silently reclassify the same home network as Public while the current Wi-Fi network still appears marked visible as Private in Settings, this eventually disable Network Discovery and File Sharing.
 
 ![Windows 11 Wi-Fi properties for the connected home network show the network profile set to Public, while Network Discovery and File Sharing remain disabled after a restart or reconnection.](images/windows-11-wifi-properties-generic-network.jpeg)
 
@@ -28,7 +47,7 @@ Normal Windows behavior after reboot:
         
         Then finally you can see other computers and devices on the network, even the server itself computer name along as the others computers availables on the network, but after a reboot, the same problem appears again.
 
-This script was created to automate this repetitive process and remove the need to repeat the same manual steps every time.
+
 
         - Network discovery and file sharing are restricted on Public networks by default.
         - Network discovery and file sharing are normally enabled only after the network is

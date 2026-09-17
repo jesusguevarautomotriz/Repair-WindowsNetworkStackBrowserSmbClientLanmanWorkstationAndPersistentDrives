@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-To be filled by good proactive AI assistant.
+Configures a Windows computer as a discoverable SMB file server on a trusted network.
 
 .DESCRIPTION
     Performs deep resets on DNS, IP, Winsock, TCP/IP stack, WinHTTP/WinINet proxies,

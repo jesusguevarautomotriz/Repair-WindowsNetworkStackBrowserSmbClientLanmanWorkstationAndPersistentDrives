@@ -1,3 +1,5 @@
+This script consist of two script, one for run on the server and one for run on the client.
+
 Server side (Any Windows 10 or 11 PC with shared folders) specific Browse  Windows Network Discovery that is persistent disable by default by windows after every restart and the user find annoying go on wifi network make private every time, go on file explorer enable file sharing, LanmanServer (SMB Server).
     - This is no a windows error, this is a windows design decision to disable network discovery and file sharing by default for security reasons. This script will enable network discovery and file sharing on the server facilitate this jus by running the script instead of clicking trought the windows options.
         Configures a Windows computer as a discoverable SMB file server on a trusted network.

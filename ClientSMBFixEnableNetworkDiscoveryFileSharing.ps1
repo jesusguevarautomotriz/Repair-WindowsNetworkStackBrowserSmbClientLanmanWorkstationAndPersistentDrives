@@ -133,8 +133,59 @@ $smbServices = @(
 
 foreach ($svc in $smbServices) {
     Set-Service -Name $svc.Name -StartupType Automatic -Status Running -ErrorAction SilentlyContinue
-    $status = (Get-Service -Name $svc.Name).Status
+    $status = (Get-Service -Name $svc.Name).ErrorActionPreference = 'SilentlyContinue'; $status = (Get-Service -Name $svc.Name).Status
     Write-Host "  -> SMB Service Active: [$($svc.Name)] ($($svc.Desc)) -> Status: $status" -ForegroundColor Green
+}
+
+# 6a. Restart LanmanWorkstation (explicit stop/start) to refresh SMB client stack
+Write-Host "`n[4a/5] Restarting LanmanWorkstation service (net stop/start)..." -ForegroundColor Yellow
+
+function Invoke-NetCommand {
+    param(
+        [string]$Command,
+        [string[]]$Arguments = @()
+    )
+    Write-Host "  -> RUN: net $Command $($Arguments -join ' ')" -ForegroundColor Cyan
+    try {
+        $output = & cmd.exe /c "net $Command $($Arguments -join ' ')" 2>&1
+        $exitCode = $LASTEXITCODE
+        if ($output) {
+            $output | ForEach-Object { Write-Host "     $_" -ForegroundColor Gray }
+        }
+        if ($exitCode -ne 0) {
+            Write-Warning "  -> ERROR: 'net $Command' exited with code $exitCode"
+            Write-Warning "  -> The script will continue execution (non-fatal)."
+            Write-Host "     Press Enter to continue or review the error above..." -ForegroundColor Yellow
+            Read-Host | Out-Null
+        } else {
+            Write-Host "  -> OK: 'net $Command' completed successfully (exit code $exitCode)" -ForegroundColor Green
+        }
+        return $exitCode
+    }
+    catch {
+        Write-Warning "  -> EXCEPTION running 'net $Command': $($_.Exception.Message)"
+        Write-Warning "  -> The script will continue execution (non-fatal)."
+        Write-Host "     Press Enter to continue or review the error above..." -ForegroundColor Yellow
+        Read-Host | Out-Null
+        return 1
+    }
+}
+
+Invoke-NetCommand -Command "stop" -Arguments @("lanmanworkstation", "/y") | Out-Null
+Start-Sleep -Seconds 2
+Invoke-NetCommand -Command "start" -Arguments @("lanmanworkstation") | Out-Null
+Start-Sleep -Seconds 2
+
+try {
+    $lmwStatus = (Get-Service -Name "LanmanWorkstation" -ErrorAction SilentlyContinue).Status
+    if ($lmwStatus) {
+        Write-Host "  -> LanmanWorkstation current status: $lmwStatus" -ForegroundColor Green
+    } else {
+        Write-Warning "  -> Could not query LanmanWorkstation status after restart."
+    }
+}
+catch {
+    Write-Warning "  -> Exception querying LanmanWorkstation status: $($_.Exception.Message)"
 }
 
 # 7. Enable Server-side SMB Inbound Firewall Rules explicitly and print exact port mappings

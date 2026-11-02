@@ -1,0 +1,18 @@
+feat(client): restart LanmanWorkstation via explicit net stop/start
+
+Add an explicit restart of the LanmanWorkstation (SMB Client) service to the client configuration script to refresh the SMB client stack after configuring SMB-related services and firewall rules.
+
+### Added
+- `Invoke-NetCommand` helper function to print each `net` command before execution, stream cmd output, capture exit codes, report errors with warnings, and prompt for pause on failure without aborting the script.
+- New step `[4a/5] Restarting LanmanWorkstation service (net stop/start)` that runs `net stop lanmanworkstation /y` followed by `net start lanmanworkstation` with a short delay between commands.
+- Post-restart status check that queries and logs `LanmanWorkstation` service state.
+
+### Changed
+- Moved LanmanWorkstation restart logic into the client script at an appropriate point after SMB service configuration and before opening SMB firewall rules, ensuring the client stack is refreshed in context.
+- Adjusted step numbering context to include the new sub-step while keeping the overall flow intact.
+
+### Notes
+- Commands are executed via `cmd.exe /c net ...` to match the requested form.
+- All errors are non-fatal: failures are reported, the user is prompted to press Enter to continue, and script execution proceeds.
+- No changes to the triple-confirmation flow, elevation logic, network profile configuration, firewall rule enabling, discovery services, or multicast refresh.
+```

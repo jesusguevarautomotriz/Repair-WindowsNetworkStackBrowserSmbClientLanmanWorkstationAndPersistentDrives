@@ -1,10 +1,15 @@
 ## Summary
+windows browse network computers (Newtork discovery)and LAN network shared folders and mapped SMB drives drives letter issues** Designed for home lab and testing use only; not suitable for business or enterprise security environments.
+
+This script This script applies targeted configuration, SAMBA SMB/CIFS client services (`LanmanWorkstation`), firewall rules, persistent network drives, and Samba protocol connections from Windows 10/11 or Linux clients (Ubuntu, Debian, etc.). 
+
+ Use this when you're facing, inaccessible SMB shares, or Linux/Samba authentication errors that won't resolve through standard troubleshooting.
 
 ### Issue description:
 windows design decision to disable network discovery and file sharing by default after every reboot for security reasons making hard to share files on home local area network, the user find annoying go on WiFi network make private every time, go on file explorer enable file sharing, LanmanServer (SMB Server).
 
 ## Purpose
-This script will enable network discovery and file sharing on the server and the client by facilitate this just by running the script instead of clicking trought the windows options trought the GUI. This script was created to automate this repetitive process and remove the need to repeat the same manual steps every time.
+Experimental PowerShell script for personal networks enviroment, to fix only the specific issue of enable network discovery and file sharing on the server and the client facilitating this just by running the script instead of clicking trought the windows options trought the GUI. This script was created to automate this repetitive process and remove the need to repeat the same manual steps every time.
 
 This script consist of two scripts: one for run on the server and one for run on the client.
 
@@ -27,7 +32,11 @@ Configures a Windows computer as a discoverable SMB client on a trusted network.
      
 
 ## Detailed issue desciption with screenshots:
-  - On a properly functioning, non-corrupted PC, Windows normally remembers the network category (Public or Private) for a saved Wi-Fi profile associated with a known SSID. However, after a reboot or Wi-Fi newtork discconection and reconnection, Windows may silently reclassify the same home network as Public while the current Wi-Fi network still appears marked visible as Private in Settings, this eventually disable Network Discovery and File Sharing.
+When you connect to a WiFi network by default windows set it to Pulic network profile, preventing network file sharing.
+
+When haved oready shared folders on a Windows PC (SMB Server) and the network profile still set to public others PCs of mobile devices will bet no able to connect and acces to the shared folders until you set the WiFi network profile to Private.
+
+However, after a reboot or Wi-Fi newtork discconection and reconnection, Windows may silently reclassify the same home network as Public while the current Wi-Fi network still appears marked visible as Private in Settings, this eventually disable Network Discovery and File Sharing.
 
 ![Windows 11 Wi-Fi properties for the connected home network show the network profile set to Public, while Network Discovery and File Sharing remain disabled after a restart or reconnection.](images/windows-11-wifi-properties-generic-network.jpeg)
 
@@ -60,13 +69,9 @@ Configures a Windows computer as a discoverable SMB client on a trusted network.
         firewall rules, starts the discovery and SMB services, and configures the computer
         to publish and host SMB shares without requiring the settings to be changed manually.
 
-# Repair-WindowsNetworkStackBrowserSmbClientLanmanWorkstationAndPersistentDrives.ps1
+# ServerWindowsSMBFixWiFiSettoPrivateNetworkEnableNetworkDiscoveryFileSharing.ps1
 
-**Experimental PowerShell troubleshooting script for personal networks enviroment, to fix specific windows browse network computers (Newtork discovery)and LAN network shared folders and mapped SMB drives drives letter issues** Designed for home lab and testing use only; not suitable for business or enterprise security environments.
 
-A quick-and-dirty utility that systematically diagnoses and repairs stubborn Windows network connectivity errors, browser cache issues, SAMBA SMB/CIFS client services (`LanmanWorkstation`), firewall rules, persistent network drives, and Samba protocol connections from Windows 10/11 or Linux clients (Ubuntu, Debian, etc.). 
-
-This script performs aggressive resets to the Windows network stack, firewall rules, and drive mappings as a **last-resort troubleshooting measure** for deep-level connectivity failures that survive standard Windows repair procedures. Use this when you're facing broken network connections, inaccessible SMB shares, or Linux/Samba authentication errors that won't resolve through standard troubleshooting.
 
 > **⚠️ DISCLAIMER & CRITICAL WARNING**
 > 

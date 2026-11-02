@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# This hook runs after each commit and copies the client SMB fix script to the testing machine via PowerShell remoting over SSH (port 2222).
+repo_root=$(git rev-parse --show-toplevel)
+debug_log="$repo_root/IDEAutomation_VSCodeTasks/post-commit-debug.log"
+copy_script="$repo_root/IDEAutomation_VSCodeTasks/copy-to-050-0011_via-psremoting-ssh.ps1"
+
+# Truncate the old log so every commit gets a new execution report.
+: > "$debug_log"
+
+run_timestamp=$(date '+%Y-%m-%d-%H%M%S')
+human_date=$(date '+%A, %B %-d, %Y at %-I:%M:%S %p')
+timezone_offset=$(date '+%:z')
+
+log() {
+	printf '%s\n' "$1" >> "$debug_log"
+}
+
+log 'POST-COMMIT HOOK EXECUTION LOG'
+log '============================='
+log "Timestamp (yyyy-MM-dd-HHmmss): $run_timestamp"
+log "Date and time: $human_date (UTC$timezone_offset)"
+log ''
+log 'Hook details:'
+log "  Hook file: $repo_root/.githooks/post-commit"
+log "  Repository root: $repo_root"
+log "  PowerShell file being run: $copy_script"
+log '  Source file: ClientSMBFixEnableNetworkDiscoveryFileSharing.ps1'
+log '  Destination: 050-0011:2222 via PowerShell Remoting over SSH'
+log '  Target path: $env:USERPROFILE\Downloads (user50)'
+log ''
+log 'Copy script output:'
+
+# Show the copy script output in the terminal and save the same output in the log.
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "$copy_script" 2>&1 | tee -a "$debug_log"
+hook_exit_code=${PIPESTATUS[0]}
+
+log ''
+log "PowerShell exit code: $hook_exit_code"
+log 'POST-COMMIT HOOK END'
+exit $hook_exit_code
